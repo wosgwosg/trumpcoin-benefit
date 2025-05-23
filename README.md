@@ -642,9 +642,15 @@ Whenever you make changes to your code and want to update the repository:
    - Ensure your IP is allowed to connect to the database
 
 3. **Static files not loading**:
-   - Make sure WhiteNoise is configured correctly
-   - Run `python manage.py collectstatic` before deploying
-   - Check the browser console for 404 errors
+   - Make sure WhiteNoise is configured correctly in your settings file
+   - Ensure `STATICFILES_DIRS` is properly set to include your static files directory
+   - Verify that `collectstatic` is running during the build process
+   - Check that the `STATIC_ROOT` directory is being properly served
+   - For Render.com specifically:
+     - Make sure your `render.yaml` includes `collectstatic` in the build command
+     - Ensure WhiteNoise middleware is properly configured in your settings
+     - Try temporarily setting `DEBUG = True` to see if that helps identify the issue
+   - Check the browser console for 404 errors and specific paths that are failing
 
 4. **Email not sending**:
    - Verify your email provider credentials

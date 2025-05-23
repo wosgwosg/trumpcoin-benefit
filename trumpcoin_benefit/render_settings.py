@@ -6,7 +6,7 @@ from .settings import *
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True  # Temporarily enabled for static files troubleshooting
 
 # ALLOWED_HOSTS = ['trumpcoin-benefit.onrender.com', 'trumpcoin-benefit.live', 'www.trumpcoin-benefit.live']
 import os
@@ -25,14 +25,17 @@ DATABASES = {
 # Static files (CSS, JavaScript, Images)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Simplified static file serving
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add WhiteNoise middleware
-] + MIDDLEWARE
+# WhiteNoise debugging settings
+WHITENOISE_AUTOREFRESH = True  # Refresh static files on each request
+WHITENOISE_USE_FINDERS = True  # Use Django's finders to locate static files
+
+# Make sure WhiteNoise middleware is first after security middleware
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 # Email configuration (using SendGrid as an example)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
