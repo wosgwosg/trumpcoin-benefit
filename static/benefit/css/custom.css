@@ -24,7 +24,7 @@ body {
 }
 
 .navbar-brand, .nav-link {
-    color: var(--trump-white) !important;
+    color: var(--light-gray) !important; /* Chnage back to White --trump-white */
 }
 
 .nav-link:hover {
