@@ -6,12 +6,12 @@ This file contains settings that are specific to the production environment.
 from .settings import *
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'your-secure-secret-key'  # TODO: Generate a new secure key
+SECRET_KEY = 'django-insecure-(lucxc%komz04$r0v!twbgz(ztfk^n5ko(y&mc(c%gz%f1+y3-'  # TODO: Generate a new secure key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['your-domain.com', 'www.your-domain.com']  # TODO: Add your domain
+ALLOWED_HOSTS = ['trumpcoin-benefit-2oyf.onrender.com', 'trumpcoin-benefit.live', 'www.trumpcoin-benefit.live']  # TODO: Add your domain
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases

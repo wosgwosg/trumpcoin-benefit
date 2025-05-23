@@ -3,7 +3,7 @@ import dj_database_url
 from .settings import *
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-secret-key')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-(lucxc%komz04$r0v!twbgz(ztfk^n5ko(y&mc(c%gz%f1+y3-')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # Temporarily enabled for static files troubleshooting
