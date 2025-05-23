@@ -6,7 +6,7 @@ from .settings import *
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-(lucxc%komz04$r0v!twbgz(ztfk^n5ko(y&mc(c%gz%f1+y3-')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  # Temporarily enabled for static files troubleshooting
+DEBUG = False  # Temporarily enabled for static files troubleshooting
 
 # ALLOWED_HOSTS = ['trumpcoin-benefit.onrender.com', 'trumpcoin-benefit.live', 'www.trumpcoin-benefit.live']
 import os
