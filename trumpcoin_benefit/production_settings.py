@@ -38,8 +38,9 @@ EMAIL_HOST_PASSWORD = 'your-email-password'  # TODO: Use app password for Gmail
 DEFAULT_FROM_EMAIL = 'TrumpCoin Benefit <your-email@gmail.com>'  # TODO: Update with your email
 
 # Static files (CSS, JavaScript, Images)
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Media files
 MEDIA_ROOT = BASE_DIR / 'media'
