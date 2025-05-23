@@ -667,5 +667,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 "# trumpcoin-benefit" 
 "# trumpcoin-benefit" 
 "# trumpcoin-benefit" 
-#   t r u m p c o i n - b e n e f i t  
- 
+#   t r u m p c o i n - b e n e f i t 
