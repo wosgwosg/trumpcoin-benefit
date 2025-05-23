@@ -38,6 +38,7 @@ EMAIL_HOST_PASSWORD = 'your-email-password'  # TODO: Use app password for Gmail
 DEFAULT_FROM_EMAIL = 'TrumpCoin Benefit <your-email@gmail.com>'  # TODO: Update with your email
 
 # Static files (CSS, JavaScript, Images)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
