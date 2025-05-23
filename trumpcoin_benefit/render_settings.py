@@ -14,6 +14,12 @@ import os
 # Get the ALLOWED_HOSTS from environment variable or use default
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'trumpcoin-benefit-2oyf.onrender.com,localhost,127.0.0.1,trumpcoin-benefit.live,www.trumpcoin-benefit.live').split(',')
 
+# Set RENDER environment variable to indicate we're running on Render.com
+os.environ['RENDER'] = 'true'
+
+# Add context processor for base template selection
+TEMPLATES[0]['OPTIONS']['context_processors'].append('benefit.context_processors.base_template')
+
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
