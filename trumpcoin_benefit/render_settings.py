@@ -8,7 +8,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-secret-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['trumpcoin-benefit.onrender.com', 'trumpcoin-benefit.live', 'www.trumpcoin-benefit.live']
+# ALLOWED_HOSTS = ['trumpcoin-benefit.onrender.com', 'trumpcoin-benefit.live', 'www.trumpcoin-benefit.live']
+import os
+
+# Get the ALLOWED_HOSTS from environment variable or use default
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'trumpcoin-benefit-2oyf.onrender.com,localhost,127.0.0.1,trumpcoin-benefit.live,www.trumpcoin-benefit.live').split(',')
+
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
