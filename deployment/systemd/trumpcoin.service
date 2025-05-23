@@ -1,0 +1,29 @@
+[Unit]
+Description=Gunicorn daemon for TrumpCoin Benefit
+After=network.target postgresql.service
+
+[Service]
+# Replace with your actual username
+User=your_username
+Group=www-data
+
+# Replace with your actual project path
+WorkingDirectory=/path/to/trumpcoin-benefit
+
+# Replace with your actual project path
+ExecStart=/path/to/trumpcoin-benefit/venv/bin/gunicorn \
+          --workers 3 \
+          --bind unix:/path/to/trumpcoin-benefit/trumpcoin.sock \
+          trumpcoin_benefit.wsgi:application \
+          --env DJANGO_SETTINGS_MODULE=trumpcoin_benefit.production_settings
+
+# Restart the service if it fails
+Restart=on-failure
+RestartSec=5s
+
+# Environment variables (optional)
+# Environment=DJANGO_SECRET_KEY=your_secret_key
+# Environment=DATABASE_URL=postgres://user:password@localhost/dbname
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,137 @@
+{% extends 'benefit/base.html' %}
+{% load custom_filters %}
+
+{% block title %}TrumpCoin Benefit Program - Contact Us{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="mb-0">Contact Us</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-5">
+                        <div class="col-md-6">
+                            <h2 class="mb-4">Get in Touch</h2>
+                            <p>Have questions about the TrumpCoin Benefit Program? Our team is here to help. Fill out the form or use one of our contact methods below.</p>
+                            
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary text-white rounded-circle p-3 me-3" style="width: 50px; height: 50px; text-align: center;">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Email</h5>
+                                    <p class="mb-0">support@trumpcoin-benefit.live</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary text-white rounded-circle p-3 me-3" style="width: 50px; height: 50px; text-align: center;">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Phone</h5>
+                                    <p class="mb-0">(800) 555-TRUMP</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary text-white rounded-circle p-3 me-3" style="width: 50px; height: 50px; text-align: center;">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Hours</h5>
+                                    <p class="mb-0">Monday - Friday: 9am - 5pm EST</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h2 class="mb-4">Contact Form</h2>
+                            <form method="post">
+                                {% csrf_token %}
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.name.id_for_label }}" class="form-label">Name</label>
+                                    {{ form.name|add_class:"form-control" }}
+                                    {% if form.name.errors %}
+                                        <div class="text-danger">
+                                            {% for error in form.name.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+                                    {{ form.email|add_class:"form-control" }}
+                                    {% if form.email.errors %}
+                                        <div class="text-danger">
+                                            {% for error in form.email.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.subject.id_for_label }}" class="form-label">Subject</label>
+                                    {{ form.subject|add_class:"form-control" }}
+                                    {% if form.subject.errors %}
+                                        <div class="text-danger">
+                                            {% for error in form.subject.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.message.id_for_label }}" class="form-label">Message</label>
+                                    {{ form.message|add_class:"form-control" }}
+                                    {% if form.message.errors %}
+                                        <div class="text-danger">
+                                            {% for error in form.message.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Send Message</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-5">
+                        <h2 class="mb-4">Frequently Asked Questions</h2>
+                        <p>Before contacting us, you might find the answer to your question in our FAQ section.</p>
+                        <a href="{% url 'faq' %}" class="btn btn-outline-primary">View FAQs</a>
+                    </div>
+                    
+                    <div class="mb-5">
+                        <h2 class="mb-4">Application Status</h2>
+                        <p>If you've already applied and want to check your application status, please log in to your account.</p>
+                        <a href="{% url 'login' %}" class="btn btn-outline-primary">Login to Your Account</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<style>
+    /* Custom styles for the contact form */
+    .form-control:focus {
+        border-color: var(--trump-blue);
+        box-shadow: 0 0 0 0.25rem rgba(60, 59, 110, 0.25);
+    }
+</style>
+{% endblock %}

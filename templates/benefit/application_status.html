@@ -1,0 +1,264 @@
+{% extends 'benefit/base.html' %}
+
+{% block title %}TrumpCoin Benefit Program - Application Status{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h1 class="mb-0">Application Status</h1>
+                    <a href="{% url 'dashboard' %}" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-primary">
+                        <div class="d-flex align-items-center">
+                            <div class="me-3">
+                                <i class="fas fa-info-circle fa-2x"></i>
+                            </div>
+                            <div>
+                                <h5 class="alert-heading mb-1">Your Tracking Code</h5>
+                                <p class="mb-0">{{ application.unique_tracking_code }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="mb-0">Current Status</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="me-3">
+                                            {% if application.application_status == 'pending' %}
+                                                <i class="fas fa-clock fa-3x status-pending"></i>
+                                            {% elif application.application_status == 'approved' %}
+                                                <i class="fas fa-check-circle fa-3x status-approved"></i>
+                                            {% elif application.application_status == 'rejected' %}
+                                                <i class="fas fa-times-circle fa-3x status-rejected"></i>
+                                            {% elif application.application_status == 'disbursed' %}
+                                                <i class="fas fa-money-bill-wave fa-3x status-disbursed"></i>
+                                            {% endif %}
+                                        </div>
+                                        <div>
+                                            <h2 class="mb-0">
+                                                {% if application.application_status == 'pending' %}
+                                                    Pending
+                                                {% elif application.application_status == 'approved' %}
+                                                    Approved
+                                                {% elif application.application_status == 'rejected' %}
+                                                    Rejected
+                                                {% elif application.application_status == 'disbursed' %}
+                                                    Disbursed
+                                                {% endif %}
+                                            </h2>
+                                            <p class="text-muted mb-0">Last updated: {{ application.updated_at|date:"F j, Y" }}</p>
+                                        </div>
+                                    </div>
+                                    
+                                    {% if application.admin_notes %}
+                                        <div class="alert alert-secondary">
+                                            <h5 class="alert-heading">Notes from Administrator</h5>
+                                            <p class="mb-0">{{ application.admin_notes }}</p>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="mb-0">Application Details</h3>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Application Date
+                                            <span>{{ application.created_at|date:"F j, Y" }}</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Applied Amount
+                                            <span>${{ bank_details.amount_to_apply|floatformat:2 }}</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Activation Deposit (10%)
+                                            <span>${{ application.activation_deposit_amount|floatformat:2 }}</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Activation Status
+                                            <span class="badge {% if bank_details.activation_deposit_status == 'completed' %}bg-success{% else %}bg-warning{% endif %} rounded-pill">
+                                                {{ bank_details.activation_deposit_status|title }}
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3 class="mb-0">Detailed Timeline</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="timeline">
+                                <div class="row mb-4">
+                                    <div class="col-auto">
+                                        <div class="bg-success text-white rounded-circle p-3" style="width: 50px; height: 50px; text-align: center;">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <h5>Application Submitted</h5>
+                                        <p class="text-muted mb-0">{{ application.created_at|date:"F j, Y, g:i A" }}</p>
+                                        <p>Your application has been successfully submitted and is awaiting review.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-4">
+                                    <div class="col-auto">
+                                        <div class="{% if application.application_status == 'pending' %}bg-secondary{% else %}bg-success{% endif %} text-white rounded-circle p-3" style="width: 50px; height: 50px; text-align: center;">
+                                            {% if application.application_status == 'pending' %}
+                                                <i class="fas fa-hourglass-half"></i>
+                                            {% else %}
+                                                <i class="fas fa-check"></i>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <h5>Application Review</h5>
+                                        {% if application.application_status == 'pending' %}
+                                            <p class="text-muted mb-0">In Progress</p>
+                                            <p>Our team is currently reviewing your application. This process typically takes 1-3 business days.</p>
+                                        {% else %}
+                                            <p class="text-muted mb-0">{{ application.updated_at|date:"F j, Y, g:i A" }}</p>
+                                            <p>Your application has been reviewed.</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-4">
+                                    <div class="col-auto">
+                                        <div class="{% if application.application_status == 'approved' or application.application_status == 'disbursed' %}bg-success{% else %}bg-secondary{% endif %} text-white rounded-circle p-3" style="width: 50px; height: 50px; text-align: center;">
+                                            {% if application.application_status == 'approved' or application.application_status == 'disbursed' %}
+                                                <i class="fas fa-check"></i>
+                                            {% else %}
+                                                <i class="fas fa-hourglass-half"></i>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <h5>Activation Deposit</h5>
+                                        {% if bank_details.activation_deposit_status == 'completed' %}
+                                            <p class="text-muted mb-0">Completed</p>
+                                            <p>You have successfully activated your account!</p>
+                                        {% elif application.application_status == 'approved' %}
+                                            <p class="text-muted mb-0">Pending</p>
+                                            <p>Your application has been approved. Pay to: Opay 7071851192</p>
+                                        {% else %}
+                                            <p class="text-muted mb-0">Awaiting Approval</p>
+                                            <p>Once your application is approved, an activation deposit will be required to authenticate your benefit account.</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <div class="{% if application.application_status == 'disbursed' %}bg-success{% else %}bg-secondary{% endif %} text-white rounded-circle p-3" style="width: 50px; height: 50px; text-align: center;">
+                                            {% if application.application_status == 'disbursed' %}
+                                                <i class="fas fa-check"></i>
+                                            {% else %}
+                                                <i class="fas fa-hourglass-half"></i>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <h5>Full Disbursement</h5>
+                                        {% if application.application_status == 'disbursed' %}
+                                            <p class="text-muted mb-0">Completed</p>
+                                            <p>The full amount has been disbursed to your account.</p>
+                                        {% elif bank_details.activation_deposit_status == 'completed' %}
+                                            <p class="text-muted mb-0">In Progress</p>
+                                            <p>Your banking details have been verified. The funds will be disbursed to your account within 5-7 business days.</p>
+                                        {% else %}
+                                            <p class="text-muted mb-0">Pending</p>
+                                            <p>Once your banking details are verified, the funds will be disbursed to your account.</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="mb-0">Transaction History</h3>
+                        </div>
+                        <div class="card-body">
+                            {% if transactions %}
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Type</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for transaction in transactions %}
+                                                <tr>
+                                                    <td>{{ transaction.created_at|date:"F j, Y" }}</td>
+                                                    <td>
+                                                        {% if transaction.transaction_type == 'activation' %}
+                                                            Activation Deposit
+                                                        {% elif transaction.transaction_type == 'admin_credit' %}
+                                                            Admin Credit
+                                                        {% elif transaction.transaction_type == 'disbursement' %}
+                                                            Disbursement
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>${{ transaction.amount|floatformat:2 }}</td>
+                                                    <td>
+                                                        <span class="badge {% if transaction.transaction_status == 'completed' %}bg-success{% elif transaction.transaction_status == 'pending' %}bg-warning{% else %}bg-danger{% endif %}">
+                                                            {{ transaction.transaction_status|title }}
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% else %}
+                                <div class="alert alert-info">
+                                    <p class="mb-0">No transactions have been recorded yet. Once your application is approved, transactions will appear here.</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">Need Help?</h3>
+                </div>
+                <div class="card-body">
+                    <p>If you have any questions about your application status or need assistance, please don't hesitate to contact our support team.</p>
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'contact' %}" class="btn btn-primary">Contact Support</a>
+                        <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">Back to Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

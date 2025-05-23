@@ -1,0 +1,168 @@
+{% extends 'benefit/base.html' %}
+
+{% block title %}TrumpCoin Benefit Program - Apply Now{% endblock %}
+
+{% block content %}
+<!-- Hero Section with Animated Text -->
+<section class="hero-section">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-4">
+            <span id="animated-text"></span>
+        </h1>
+        <p class="lead mb-4">Secure your financial future with the TrumpCoin Benefit Program</p>
+        <a href="{% url 'register_step1' %}" class="btn btn-light btn-lg">Apply Now</a>
+    </div>
+</section>
+
+<!-- Main Content -->
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0">About TrumpCoin Benefit Program</h2>
+                </div>
+                <div class="card-body">
+                    <p class="lead">The TrumpCoin Benefit Program is designed to provide financial assistance to eligible US citizens and Puerto Rican residents living in the United States.</p>
+                    
+                    <h3 class="mt-4">Program Highlights</h3>
+                    <ul class="list-group list-group-flush mb-4">
+                        <li class="list-group-item">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Quick and easy application process
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Secure handling of your personal information
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Transparent tracking of your application status
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Fast disbursement of approved funds
+                        </li>
+                    </ul>
+                    
+                    <p>The TrumpCoin Benefit Program is part of a broader initiative to support American citizens during these challenging times. Our mission is to ensure that every eligible individual has access to the financial resources they need.</p>
+                    
+                    <div class="text-center mt-4">
+                        <a href="{% url 'overview' %}" class="btn btn-primary me-2">Learn More</a>
+                        <a href="{% url 'register_step1' %}" class="btn btn-danger">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <!-- Application Steps -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="mb-0">Application Steps</h3>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="bg-primary text-white rounded-circle p-2 me-3" style="width: 40px; height: 40px; text-align: center;">
+                            <strong>1</strong>
+                        </div>
+                        <div>
+                            <h5>Register</h5>
+                            <p class="text-muted">Create an account with your personal details</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="bg-primary text-white rounded-circle p-2 me-3" style="width: 40px; height: 40px; text-align: center;">
+                            <strong>2</strong>
+                        </div>
+                        <div>
+                            <h5>Provide Bank Details</h5>
+                            <p class="text-muted">Securely submit your banking information</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="bg-primary text-white rounded-circle p-2 me-3" style="width: 40px; height: 40px; text-align: center;">
+                            <strong>3</strong>
+                        </div>
+                        <div>
+                            <h5>Verification</h5>
+                            <p class="text-muted">We verify your eligibility</p>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex align-items-start">
+                        <div class="bg-primary text-white rounded-circle p-2 me-3" style="width: 40px; height: 40px; text-align: center;">
+                            <strong>4</strong>
+                        </div>
+                        <div>
+                            <h5>Receive Funds</h5>
+                            <p class="text-muted">Approved funds are disbursed to your account</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonials -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">Success Stories</h3>
+                </div>
+                <div class="card-body">
+                    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="text-center mb-3">
+                                    <i class="fas fa-user-circle fa-3x text-primary"></i>
+                                </div>
+                                <p class="fst-italic">"The TrumpCoin Benefit Program helped me during a difficult financial time. The process was simple and the funds were in my account within days!"</p>
+                                <p class="text-end"><strong>- John D., Texas</strong></p>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="text-center mb-3">
+                                    <i class="fas fa-user-circle fa-3x text-primary"></i>
+                                </div>
+                                <p class="fst-italic">"I was skeptical at first, but the program exceeded my expectations. The customer service was excellent and the application process was straightforward."</p>
+                                <p class="text-end"><strong>- Maria R., Florida</strong></p>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="text-center mb-3">
+                                    <i class="fas fa-user-circle fa-3x text-primary"></i>
+                                </div>
+                                <p class="fst-italic">"Thanks to the TrumpCoin Benefit Program, I was able to pay off my debts and start fresh. I'm grateful for this opportunity."</p>
+                                <p class="text-end"><strong>- Robert M., Ohio</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Initialize Typed.js for animated text
+    document.addEventListener('DOMContentLoaded', function() {
+        var typed = new Typed('#animated-text', {
+            strings: ["Apply for Trump-Coin Benefits", "And Get Funded Today!"],
+            typeSpeed: 50,
+            backSpeed: 30,
+            backDelay: 1500,
+            startDelay: 500,
+            loop: true,
+            showCursor: true,
+            cursorChar: '|'
+        });
+        
+        // Initialize testimonial carousel
+        var testimonialCarousel = document.getElementById('testimonialCarousel');
+        var carousel = new bootstrap.Carousel(testimonialCarousel, {
+            interval: 5000,
+            wrap: true
+        });
+    });
+</script>
+{% endblock %}

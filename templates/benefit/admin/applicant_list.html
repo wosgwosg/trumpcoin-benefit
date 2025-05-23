@@ -1,0 +1,160 @@
+{% extends 'benefit/admin/base_admin.html' %}
+
+{% block title %}TrumpCoin Benefit Program - Applicant List{% endblock %}
+
+{% block admin_content %}
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h1 class="mb-0">Applicant List</h1>
+        <div>
+            {% if status_filter %}
+                <a href="{% url 'applicant_list' %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-times me-2"></i>Clear Filter
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="card-body">
+        <!-- Search and Filter -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <form method="get" class="d-flex">
+                    <input type="text" name="search" class="form-control me-2" placeholder="Search by name, email, or tracking code" value="{{ search_query }}">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search me-2"></i>Search
+                    </button>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex justify-content-end">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-filter me-2"></i>Filter by Status
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item {% if status_filter == 'pending' %}active{% endif %}" href="{% url 'applicant_list' %}?status=pending{% if search_query %}&search={{ search_query }}{% endif %}">Pending</a></li>
+                            <li><a class="dropdown-item {% if status_filter == 'approved' %}active{% endif %}" href="{% url 'applicant_list' %}?status=approved{% if search_query %}&search={{ search_query }}{% endif %}">Approved</a></li>
+                            <li><a class="dropdown-item {% if status_filter == 'rejected' %}active{% endif %}" href="{% url 'applicant_list' %}?status=rejected{% if search_query %}&search={{ search_query }}{% endif %}">Rejected</a></li>
+                            <li><a class="dropdown-item {% if status_filter == 'disbursed' %}active{% endif %}" href="{% url 'applicant_list' %}?status=disbursed{% if search_query %}&search={{ search_query }}{% endif %}">Disbursed</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item {% if not status_filter %}active{% endif %}" href="{% url 'applicant_list' %}{% if search_query %}?search={{ search_query }}{% endif %}">All Applications</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Filter Status Display -->
+        {% if status_filter or search_query %}
+            <div class="alert alert-info mb-4">
+                {% if status_filter %}
+                    <span class="badge bg-primary me-2">Status: {{ status_filter|title }}</span>
+                {% endif %}
+                {% if search_query %}
+                    <span class="badge bg-primary">Search: "{{ search_query }}"</span>
+                {% endif %}
+            </div>
+        {% endif %}
+        
+        <!-- Applicant Table -->
+        {% if applications %}
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Tracking Code</th>
+                            <th>Applicant</th>
+                            <th>Email</th>
+                            <th>Applied On</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for application in applications %}
+                            <tr>
+                                <td>{{ application.unique_tracking_code }}</td>
+                                <td>{{ application.user.first_name }} {{ application.user.last_name }}</td>
+                                <td>{{ application.user.email }}</td>
+                                <td>{{ application.created_at|date:"M d, Y" }}</td>
+                                <td>
+                                    {% with bank_details=application.user.bank_details %}
+                                        ${{ bank_details.amount_to_apply|floatformat:2 }}
+                                    {% endwith %}
+                                </td>
+                                <td>
+                                    {% if application.application_status == 'pending' %}
+                                        <span class="badge bg-warning">Pending</span>
+                                    {% elif application.application_status == 'approved' %}
+                                        <span class="badge bg-success">Approved</span>
+                                    {% elif application.application_status == 'rejected' %}
+                                        <span class="badge bg-danger">Rejected</span>
+                                    {% elif application.application_status == 'disbursed' %}
+                                        <span class="badge bg-info">Disbursed</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{% url 'applicant_detail' application.unique_tracking_code %}" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                <p class="mb-0">No applications found matching your criteria.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Application Statistics -->
+<div class="card">
+    <div class="card-header">
+        <h2 class="mb-0">Application Statistics</h2>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card bg-light">
+                    <div class="card-body text-center">
+                        <h3 class="display-5">{{ pending_count|add:approved_count|add:rejected_count|add:disbursed_count }}</h3>
+                        <p class="mb-0">Total Applications</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="card bg-warning text-dark">
+                    <div class="card-body text-center">
+                        <h3 class="display-5">{{ pending_count }}</h3>
+                        <p class="mb-0">Pending</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body text-center">
+                        <h3 class="display-5">{{ approved_count }}</h3>
+                        <p class="mb-0">Approved</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="card bg-danger text-white">
+                    <div class="card-body text-center">
+                        <h3 class="display-5">{{ rejected_count }}</h3>
+                        <p class="mb-0">Rejected</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

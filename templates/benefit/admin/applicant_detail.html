@@ -1,0 +1,326 @@
+{% extends 'benefit/admin/base_admin.html' %}
+
+{% block title %}TrumpCoin Benefit Program - Applicant Detail{% endblock %}
+
+{% block admin_content %}
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h1 class="mb-0">Applicant Detail</h1>
+        <div>
+            <a href="{% url 'applicant_list' %}" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left me-2"></i>Back to List
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h3 class="mb-0">Application Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Tracking Code:</strong>
+                                <span>{{ application.unique_tracking_code }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Application Date:</strong>
+                                <span>{{ application.created_at|date:"F j, Y" }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Status:</strong>
+                                <span>
+                                    {% if application.application_status == 'pending' %}
+                                        <span class="badge bg-warning">Pending</span>
+                                    {% elif application.application_status == 'approved' %}
+                                        <span class="badge bg-success">Approved</span>
+                                    {% elif application.application_status == 'rejected' %}
+                                        <span class="badge bg-danger">Rejected</span>
+                                    {% elif application.application_status == 'disbursed' %}
+                                        <span class="badge bg-info">Disbursed</span>
+                                    {% endif %}
+                                </span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Applied Amount:</strong>
+                                <span>${{ bank_details.amount_to_apply|floatformat:2 }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Activation Deposit:</strong>
+                                <span>${{ application.activation_deposit_amount|floatformat:2 }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Activation Status:</strong>
+                                <span>
+                                    {% if bank_details.activation_deposit_status == 'pending' %}
+                                        <span class="badge bg-warning">Pending</span>
+                                    {% else %}
+                                        <span class="badge bg-success">Completed</span>
+                                    {% endif %}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h3 class="mb-0">Applicant Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Name:</strong>
+                                <span>{{ user.first_name }} {{ user.last_name }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Email:</strong>
+                                <span>{{ user.email }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Username:</strong>
+                                <span>{{ user.username }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Phone:</strong>
+                                <span>{{ profile.phone }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Date of Birth:</strong>
+                                <span>{{ profile.dob|date:"F j, Y" }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Country:</strong>
+                                <span>{{ profile.country }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>SSN/ID:</strong>
+                                <span>{{ profile.ssn_or_id }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Address:</strong>
+                                <span>{{ profile.address }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h3 class="mb-0">Banking Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Bank Name:</strong>
+                                <span>{{ bank_details.bank_name }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Account Number:</strong>
+                                <span>{{ bank_details.account_number }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Routing Number:</strong>
+                                <span>{{ bank_details.routing_number }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h3 class="mb-0">Admin Notes</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{% url 'update_application_status' application.unique_tracking_code %}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="admin_notes" class="form-label">Notes</label>
+                                <textarea class="form-control" id="admin_notes" name="admin_notes" rows="4">{{ application.admin_notes }}</textarea>
+                                <div class="form-text">These notes will be visible to the applicant.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="status" class="form-label">Application Status</label>
+                                <select class="form-select" id="status" name="status">
+                                    <option value="pending" {% if application.application_status == 'pending' %}selected{% endif %}>Pending</option>
+                                    <option value="approved" {% if application.application_status == 'approved' %}selected{% endif %}>Approved</option>
+                                    <option value="rejected" {% if application.application_status == 'rejected' %}selected{% endif %}>Rejected</option>
+                                    <option value="disbursed" {% if application.application_status == 'disbursed' %}selected{% endif %}>Disbursed</option>
+                                </select>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Update Status</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="mb-0">Transaction History</h3>
+                    </div>
+                    <div class="card-body">
+                        {% if transactions %}
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Type</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for transaction in transactions %}
+                                            <tr>
+                                                <td>{{ transaction.created_at|date:"F j, Y" }}</td>
+                                                <td>
+                                                    {% if transaction.transaction_type == 'activation' %}
+                                                        Activation Deposit
+                                                    {% elif transaction.transaction_type == 'admin_credit' %}
+                                                        Admin Credit
+                                                    {% elif transaction.transaction_type == 'disbursement' %}
+                                                        Disbursement
+                                                    {% endif %}
+                                                </td>
+                                                <td>${{ transaction.amount|floatformat:2 }}</td>
+                                                <td>
+                                                    <span class="badge {% if transaction.transaction_status == 'completed' %}bg-success{% elif transaction.transaction_status == 'pending' %}bg-warning{% else %}bg-danger{% endif %}">
+                                                        {{ transaction.transaction_status|title }}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-info">
+                                <p class="mb-0">No transactions have been recorded yet.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h3 class="mb-0">Add Transaction</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{% url 'add_transaction' application.unique_tracking_code %}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="amount" class="form-label">Amount</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" id="amount" name="amount" step="0.01" min="0.01" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="transaction_type" class="form-label">Transaction Type</label>
+                                <select class="form-select" id="transaction_type" name="transaction_type" required>
+                                    <option value="activation">Activation Deposit</option>
+                                    <option value="admin_credit">Admin Credit</option>
+                                    <option value="disbursement">Disbursement</option>
+                                </select>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-success">Add Transaction</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h3 class="mb-0">Send Message</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" action="{% url 'send_message' application.unique_tracking_code %}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="subject" name="subject" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <h3 class="mb-0">Danger Zone</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Permanently delete this applicant and all associated data. This action cannot be undone.</p>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                            <i class="fas fa-trash-alt me-2"></i>Delete Applicant
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this applicant? This will permanently remove:</p>
+                <ul>
+                    <li>User account for {{ user.first_name }} {{ user.last_name }}</li>
+                    <li>All personal and banking information</li>
+                    <li>Application data and transaction history</li>
+                </ul>
+                <p class="text-danger"><strong>This action cannot be undone.</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form method="post" action="{% url 'delete_applicant' application.unique_tracking_code %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete Permanently</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
