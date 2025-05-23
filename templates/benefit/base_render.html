@@ -18,14 +18,48 @@
     <!-- Render-specific CSS (overrides custom.css) -->
     <link href="{% static 'benefit/css/render.css' %}" rel="stylesheet">
     
+    <!-- Inline styles for critical elements (ensures they are applied) -->
+    <style>
+        /* Critical navbar styling */
+        .navbar {
+            background-color: #3C3B6E !important; /* Trump blue */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+        }
+        
+        .navbar-brand, .nav-link {
+            color: #FFFFFF !important; /* White */
+        }
+        
+        .nav-link:hover {
+            opacity: 0.8 !important;
+        }
+        
+        /* Critical button styling */
+        .btn-primary {
+            background-color: #3C3B6E !important; /* Trump blue */
+            border-color: #3C3B6E !important;
+        }
+        
+        .btn-danger {
+            background-color: #B22234 !important; /* Trump red */
+            border-color: #B22234 !important;
+        }
+        
+        /* Critical footer styling */
+        .footer {
+            background-color: #3C3B6E !important; /* Trump blue */
+            color: #FFFFFF !important; /* White */
+        }
+    </style>
+    
     {% block extra_head %}{% endblock %}
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3C3B6E !important; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">
-                <i class="fas fa-coins me-2"></i>TrumpCoin Benefit
+            <a class="navbar-brand" href="{% url 'home' %}" style="color: #FFFFFF !important;">
+                <i class="fas fa-coins me-2" style="color: #FFFFFF !important;"></i>TrumpCoin Benefit
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -33,34 +67,34 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'overview' %}">Overview</a>
+                        <a class="nav-link" href="{% url 'overview' %}" style="color: #FFFFFF !important;">Overview</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'faq' %}">FAQ</a>
+                        <a class="nav-link" href="{% url 'faq' %}" style="color: #FFFFFF !important;">FAQ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                        <a class="nav-link" href="{% url 'contact' %}" style="color: #FFFFFF !important;">Contact</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
                     {% if user.is_authenticated %}
                         {% if user.is_staff %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'admin_dashboard' %}">Admin Dashboard</a>
+                                <a class="nav-link" href="{% url 'admin_dashboard' %}" style="color: #FFFFFF !important;">Admin Dashboard</a>
                             </li>
                         {% endif %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                            <a class="nav-link" href="{% url 'dashboard' %}" style="color: #FFFFFF !important;">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                            <a class="nav-link" href="{% url 'logout' %}" style="color: #FFFFFF !important;">Logout</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                            <a class="nav-link" href="{% url 'login' %}" style="color: #FFFFFF !important;">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-danger text-white px-3 mx-2" href="{% url 'register_step1' %}">Apply Now</a>
+                            <a class="nav-link btn btn-danger text-white px-3 mx-2" href="{% url 'register_step1' %}" style="background-color: #B22234 !important; border-color: #B22234 !important;">Apply Now</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -86,13 +120,13 @@
     </main>
     
     <!-- Footer -->
-    <footer class="footer text-center">
+    <footer class="footer text-center" style="background-color: #3C3B6E !important; color: #FFFFFF !important; padding: 30px 0; margin-top: 50px;">
         <div class="container">
             <p>&copy; {% now "Y" %} TrumpCoin Benefit Program. All rights reserved.</p>
             <p>
-                <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white me-3" style="color: #FFFFFF !important;"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white me-3" style="color: #FFFFFF !important;"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white" style="color: #FFFFFF !important;"><i class="fab fa-instagram"></i></a>
             </p>
         </div>
     </footer>
