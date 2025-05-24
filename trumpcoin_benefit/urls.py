@@ -18,12 +18,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from benefit.diagnostic_views import debug_info, test_500, test_template
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('benefit.urls')),
+    # Diagnostic URLs
+    path('debug-info/', debug_info, name='debug_info'),
+    path('test-500/', test_500, name='test_500'),
+    path('test-template/', test_template, name='test_template'),
 ]
 
 # Add media file handling in development
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,0 +1,54 @@
+/* Test CSS file to verify static file serving */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.test-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.test-header {
+    color: #3C3B6E;
+    margin-bottom: 20px;
+}
+
+.test-success {
+    color: #28a745;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px;
+    background-color: #e8f5e9;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.test-navbar {
+    background-color: #3C3B6E;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.test-button {
+    display: inline-block;
+    background-color: #B22234;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.test-button:hover {
+    background-color: #9e1d2d;
+}

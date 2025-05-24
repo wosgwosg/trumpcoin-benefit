@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static File Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #3C3B6E;
+            text-align: center;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .info {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Static File Test</h1>
+        <p class="success">If you can see this page, static files are being served correctly!</p>
+        
+        <div class="info">
+            <p>This is a simple HTML file located at <code>static/test.html</code>.</p>
+            <p>It's being served directly by WhiteNoise, bypassing Django's template system.</p>
+            <p>If this page loads but your Django templates still have styling issues, the problem is likely with how the CSS is being referenced in your templates.</p>
+        </div>
+    </div>
+</body>
+</html>

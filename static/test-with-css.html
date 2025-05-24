@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Loading Test</title>
+    <!-- Reference to the external CSS file -->
+    <link rel="stylesheet" href="/static/test.css">
+    <!-- Inline styles as a fallback -->
+    <style>
+        /* These styles will only be visible if the external CSS fails to load */
+        .fallback-message {
+            display: block;
+            background-color: #ffcccc;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-navbar">
+            TrumpCoin Benefit Program - CSS Test
+        </div>
+        
+        <h1 class="test-header">External CSS Loading Test</h1>
+        
+        <div class="test-success">
+            If this text is green and the box has a light green background, the external CSS file is loading correctly!
+        </div>
+        
+        <p>This page is testing whether external CSS files are being properly served by WhiteNoise.</p>
+        
+        <p>If the styling looks correct (blue header, green success message, red button below), then your CSS files are being served correctly.</p>
+        
+        <div class="fallback-message">
+            <strong>Warning:</strong> If you can see this red box, it means the external CSS file failed to load. 
+            Only the inline styles in the HTML are being applied.
+        </div>
+        
+        <a href="/static/test.html" class="test-button">Go to Simple Test Page</a>
+    </div>
+</body>
+</html>

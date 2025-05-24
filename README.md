@@ -650,7 +650,44 @@ Whenever you make changes to your code and want to update the repository:
      - Make sure your `render.yaml` includes `collectstatic` in the build command
      - Ensure WhiteNoise middleware is properly configured in your settings
      - Try temporarily setting `DEBUG = True` to see if that helps identify the issue
+     - Use the diagnostic tools provided (see "Diagnostic Tools" section below)
    - Check the browser console for 404 errors and specific paths that are failing
+
+## Diagnostic Tools
+
+The application includes several diagnostic tools to help troubleshoot deployment issues:
+
+1. **Static File Tests**:
+   - `/static/test.html` - A simple HTML file to test if static files are being served
+   - `/static/test-with-css.html` - Tests if external CSS files are loading correctly
+
+2. **Django Diagnostic Views**:
+   - `/debug-info/` - Displays detailed information about the environment, settings, and static files
+   - `/test-template/` - Tests if Django templates are rendering correctly
+   - `/test-500/` - Deliberately triggers a 500 error to test error handling
+
+3. **Deployment Scripts**:
+   - `deployment/render_deploy.sh` - Script to help deploy to Render.com
+   - `deployment/render_static_files_guide.md` - Detailed guide for fixing static files issues on Render.com
+
+To use the deployment script:
+
+**On Linux/macOS:**
+```bash
+# Make the script executable (if not already)
+chmod +x deployment/render_deploy.sh
+
+# Run the script
+./deployment/render_deploy.sh
+```
+
+**On Windows:**
+```
+# Run the Windows batch script
+deployment\render_deploy.bat
+```
+
+The script will guide you through the deployment process, including collecting static files, committing changes, and pushing to GitHub.
 
 4. **Email not sending**:
    - Verify your email provider credentials

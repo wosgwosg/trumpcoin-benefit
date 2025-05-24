@@ -1,0 +1,43 @@
+{% extends BASE_TEMPLATE|default:'benefit/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 50px auto; padding: 30px; background-color: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <h1 style="color: #3C3B6E; text-align: center;">Template Rendering Test</h1>
+    
+    <div style="background-color: #e8f5e9; padding: 20px; border-radius: 5px; margin: 20px 0; text-align: center;">
+        <p style="color: #28a745; font-weight: bold; font-size: 18px;">{{ message }}</p>
+    </div>
+    
+    <div style="margin-top: 30px;">
+        <h2 style="color: #3C3B6E;">Template Information</h2>
+        <ul>
+            <li><strong>Template Name:</strong> test_template.html</li>
+            <li><strong>Base Template:</strong> {% if BASE_TEMPLATE %}{{ BASE_TEMPLATE }}{% else %}benefit/base.html (default){% endif %}</li>
+            <li><strong>Context Variables:</strong> title, message</li>
+        </ul>
+    </div>
+    
+    <div style="margin-top: 30px;">
+        <h2 style="color: #3C3B6E;">Styling Test</h2>
+        <p>This section tests if styling is applied correctly:</p>
+        
+        <div class="card" style="margin-top: 20px;">
+            <div class="card-header">
+                <h3 class="mb-0">Card Header</h3>
+            </div>
+            <div class="card-body">
+                <p>This is a Bootstrap card. If it's styled correctly, it should have a blue header with white text.</p>
+                <button class="btn btn-primary">Primary Button</button>
+                <button class="btn btn-danger">Danger Button</button>
+            </div>
+        </div>
+    </div>
+    
+    <div style="margin-top: 30px; text-align: center;">
+        <a href="/debug-info/" style="display: inline-block; background-color: #3C3B6E; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; margin-right: 10px;">View Debug Info</a>
+        <a href="/static/test-with-css.html" style="display: inline-block; background-color: #B22234; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">Static CSS Test</a>
+    </div>
+</div>
+{% endblock %}
