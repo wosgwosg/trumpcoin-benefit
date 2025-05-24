@@ -29,13 +29,15 @@ DATABASES = {
 }
 
 # Email configuration
+# Email configuration (using Zoho Mail)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # TODO: Or your SMTP server
+EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'your-email@gmail.com'  # TODO: Update with your email
-EMAIL_HOST_PASSWORD = 'your-email-password'  # TODO: Use app password for Gmail
-DEFAULT_FROM_EMAIL = 'TrumpCoin Benefit <your-email@gmail.com>'  # TODO: Update with your email
+EMAIL_HOST_USER = os.environ.get('ZOHO_EMAIL_USER', 'admin@trumpcoin-benefit.live')  # your full Zoho email address
+EMAIL_HOST_PASSWORD = os.environ.get('ZOHO_EMAIL_PASSWORD', 'Qt9xkQf5tkES')  # your Zoho email password or app password
+DEFAULT_FROM_EMAIL = 'TrumpCoin Benefit <noreply@trumpcoin-benefit.live>'
+
 
 # Static files (CSS, JavaScript, Images)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

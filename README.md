@@ -159,13 +159,13 @@ MIDDLEWARE = [
     # ... rest of your middleware
 ] + MIDDLEWARE
 
-# Email configuration (using SendGrid as an example)
+# Email configuration (using Zoho Mail)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'apikey'  # this is exactly the value 'apikey'
-EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_API_KEY', '')
+EMAIL_HOST_USER = os.environ.get('ZOHO_EMAIL_USER', '')  # your full Zoho email address
+EMAIL_HOST_PASSWORD = os.environ.get('ZOHO_EMAIL_PASSWORD', '')  # your Zoho email password or app password
 DEFAULT_FROM_EMAIL = 'TrumpCoin Benefit <noreply@trumpcoin-benefit.live>'
 
 # HTTPS settings

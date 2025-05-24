@@ -6,7 +6,7 @@ from .settings import *
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-(lucxc%komz04$r0v!twbgz(ztfk^n5ko(y&mc(c%gz%f1+y3-')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  # Keep debug enabled to help diagnose 500 errors
+DEBUG = False  # Keep debug enabled to help diagnose 500 errors
 
 # ALLOWED_HOSTS = ['trumpcoin-benefit.onrender.com', 'trumpcoin-benefit.live', 'www.trumpcoin-benefit.live']
 import os
@@ -52,7 +52,16 @@ SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 
 # Email configuration (using SendGrid as an example)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Use console backend for testing
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Use console backend for testing
+# Email configuration (using Zoho Mail)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('ZOHO_EMAIL_USER', 'admin@trumpcoin-benefit.live')  # your full Zoho email address
+EMAIL_HOST_PASSWORD = os.environ.get('ZOHO_EMAIL_PASSWORD', 'Qt9xkQf5tkES')  # your Zoho email password or app password
+DEFAULT_FROM_EMAIL = 'TrumpCoin Benefit <noreply@trumpcoin-benefit.live>'
+
 
 # Enhanced logging configuration for debugging
 LOGGING = {
