@@ -162,13 +162,13 @@
                                         <h5>Activation Deposit</h5>
                                         {% if bank_details.activation_deposit_status == 'completed' %}
                                             <p class="text-muted mb-0">Completed</p>
-                                            <p>The activation deposit has been made to your account to verify your banking details.</p>
+                                            <p>You have successfully activated your account!</p>
                                         {% elif application.application_status == 'approved' %}
                                             <p class="text-muted mb-0">Pending</p>
-                                            <p>Your application has been approved. The activation deposit will be made to your account within 1-2 business days.</p>
+                                            <p>Your application has been approved. For fast activation contact +1 702 900 3096 on Telegram.</p>
                                         {% else %}
                                             <p class="text-muted mb-0">Awaiting Approval</p>
-                                            <p>Once your application is approved, an activation deposit will be made to your account.</p>
+                                            <p>Once your application is approved, an activation deposit will be required to authenticate your benefit account.</p>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -190,10 +190,10 @@
                                             <p>The full amount has been disbursed to your account.</p>
                                         {% elif bank_details.activation_deposit_status == 'completed' %}
                                             <p class="text-muted mb-0">In Progress</p>
-                                            <p>Your banking details have been verified. The remaining funds will be disbursed to your account within 5-7 business days.</p>
+                                            <p>Your banking details have been verified. The funds will be disbursed to your account within 5-7 business days.</p>
                                         {% else %}
                                             <p class="text-muted mb-0">Pending</p>
-                                            <p>Once your banking details are verified, the remaining funds will be disbursed to your account.</p>
+                                            <p>Once your banking details are verified, the funds will be disbursed to your account.</p>
                                         {% endif %}
                                     </div>
                                 </div>
