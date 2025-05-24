@@ -75,14 +75,16 @@ WSGI_APPLICATION = 'trumpcoin_benefit.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
+
+
+DATABASE_URL = os.environ.get('DATABASE_URL', 'postgresql://trumpcoin_user:19Xxp0GAWLSWsfgvlVlkBTDYyVcqESJV@dpg-d0p3j36uk2gs739903e0-a/trumpcoin_cnuv')
 DATABASES = {
     'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
 }
