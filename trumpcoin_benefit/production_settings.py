@@ -22,8 +22,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'trumpcoin_db',
         'USER': 'trumpcoin_user',
-        'PASSWORD': 'your-secure-password',  # TODO: Use a secure password
-        'HOST': 'localhost',
+        'PASSWORD': '19Xxp0GAWLSWsfgvlVlkBTDYyVcqESJV',  # TODO: Use a secure password
+        'HOST': 'dpg-d0p3j36uk2gs739903e0-a',
         'PORT': '5432',
     }
 }
