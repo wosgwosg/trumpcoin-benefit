@@ -8,8 +8,8 @@ set -e
 # Configuration variables - MODIFY THESE
 PROJECT_NAME="trumpcoin-benefit"
 PROJECT_PATH="/path/to/trumpcoin-benefit"  # TODO: Update with your actual path
-DOMAIN_NAME="your-domain.com"              # TODO: Update with your actual domain
-GIT_REPO="https://github.com/yourusername/trumpcoin-benefit.git"  # TODO: Update with your actual repo
+DOMAIN_NAME="trumpcoin-benefit.live"              # TODO: Update with your actual domain
+GIT_REPO="https://github.com/wosgwosg/trumpcoin-benefit.git"  # TODO: Update with your actual repo
 DB_NAME="trumpcoin_db"
 DB_USER="trumpcoin_user"
 DB_PASSWORD="your-secure-password"         # TODO: Update with a secure password
