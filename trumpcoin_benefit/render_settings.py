@@ -36,8 +36,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Simplified static file serving
 # Use the simpler StaticFilesStorage instead of CompressedManifestStaticFilesStorage
-# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # WhiteNoise debugging settings
 WHITENOISE_AUTOREFRESH = True  # Refresh static files on each request
