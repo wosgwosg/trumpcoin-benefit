@@ -2,7 +2,12 @@ services:
   - type: web
     name: trumpcoin-benefit
     env: python
-    buildCommand: pip install -r requirements.txt && mkdir -p staticfiles && python manage.py collectstatic --noinput
+    buildCommand: >
+      pip install -r requirements.txt && 
+      mkdir -p staticfiles && 
+      python manage.py collectstatic --noinput &&
+      python run_migrations.py &&
+      python create_superuser.py
     startCommand: gunicorn trumpcoin_benefit.wsgi:application --log-level debug
     envVars:
       - key: PYTHON_VERSION
