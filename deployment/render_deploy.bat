@@ -38,7 +38,7 @@ echo.
 set /p commit_changes="Do you want to commit these changes? (y/n): "
 
 if /i "%commit_changes%"=="y" (
-    set /p commit_message="Added Background Image Updated: "
+    set /p commit_message="Enter Commit Message: "
     
     git add .
     git commit -m "%commit_message%"
