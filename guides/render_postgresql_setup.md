@@ -85,7 +85,7 @@ DATABASES = {
 
 ```bash
 git add .
-git commit -m "Configure PostgreSQL database"
+git commit -m "Configured PostgreSQL database"
 git push
 ```
 
