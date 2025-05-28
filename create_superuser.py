@@ -19,6 +19,12 @@ def create_superuser():
     password = 'The7isstrong!'  # Change this to a secure password
     
     try:
+        # Check database connection first
+        from django.db import connection
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1")
+        print("Database connection successful!")
+        
         # Check if superuser already exists
         if not User.objects.filter(username=username).exists():
             print(f"Creating superuser {username}...")
@@ -26,8 +32,10 @@ def create_superuser():
             print("Superuser created successfully!")
         else:
             print(f"Superuser {username} already exists.")
-    except IntegrityError:
-        print("Error: Superuser could not be created.")
+    except Exception as e:
+        print(f"Error with database or superuser creation: {e}")
+        print("This might indicate a database connection issue.")
+        sys.exit(1)
         
 if __name__ == '__main__':
     create_superuser()

@@ -4,9 +4,10 @@ services:
     env: python
     buildCommand: >
       pip install -r requirements.txt && 
+      python manage.py migrate && 
       mkdir -p staticfiles && 
       python manage.py collectstatic --noinput && 
-      python create_superuser.py     
+      python create_superuser.py
     startCommand: gunicorn trumpcoin_benefit.wsgi:application --log-level debug
     envVars:
       - key: PYTHON_VERSION
@@ -24,6 +25,6 @@ services:
 
 databases:
   - name: trumpcoin-db
-    databaseName: trumpcoin
+    databaseName: trumpcoin_cnuv
     user: trumpcoin_user
     plan: free

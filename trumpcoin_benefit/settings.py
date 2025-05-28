@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(lucxc%komz04$r0v!twbgz(ztfk^n5ko(y&mc(c%gz%f1+y3-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['trumpcoin-benefit-2oyf.onrender.com', 'trumpcoin-benefit.live', 'www.trumpcoin-benefit.live']
+ALLOWED_HOSTS = ['trumpcoin-benefit-2oyf.onrender.com', 'trumpcoin-benefit.live', 'www.trumpcoin-benefit.live', 'localhost', '127.0.0.1']
 
 
 # Application definition
