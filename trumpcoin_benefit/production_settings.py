@@ -11,7 +11,7 @@ SECRET_KEY = 'django-insecure-(lucxc%komz04$r0v!twbgz(ztfk^n5ko(y&mc(c%gz%f1+y3-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['trumpcoin-benefit-2oyf.onrender.com', 'trumpcoin-benefit.live', 'www.trumpcoin-benefit.live']  # TODO: Add your domain
+ALLOWED_HOSTS = ['trumpcoin-benefit-2oyf.onrender.com', 'trumpcoin-benefit.live', 'www.trumpcoin-benefit.live', 'localhost', '127.0.0.1']  # TODO: Add your domain
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -20,11 +20,16 @@ ALLOWED_HOSTS = ['trumpcoin-benefit-2oyf.onrender.com', 'trumpcoin-benefit.live'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'trumpcoin_db',
+        'NAME': 'trumpcoin_cnuv',
         'USER': 'trumpcoin_user',
-        'PASSWORD': '19Xxp0GAWLSWsfgvlVlkBTDYyVcqESJV',  # TODO: Use a secure password
-        'HOST': 'dpg-d0p3j36uk2gs739903e0-a',
+        'PASSWORD': '19Xxp0GAWLSWsfgvlVlkBTDYyVcqESJV',
+        'HOST': 'dpg-d0p3j36uk2gs739903e0-a.oregon-postgres.render.com',
         'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
+        'CONN_MAX_AGE': 600,
+        'CONN_HEALTH_CHECKS': True,
     }
 }
 
