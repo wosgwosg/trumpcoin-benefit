@@ -14,9 +14,9 @@ from django.db.utils import IntegrityError
 User = get_user_model()
 
 def create_superuser():
-    username = 'admin'
-    email = 'admin@trumpcoin-benefit.live'
-    password = 'The7isstrong!'  # Change this to a secure password
+    username = os.environ.get('DJANGO_SUPERUSER_USERNAME')
+    email = os.environ.get('DJANGO_SUPERUSER_EMAIL')
+    password = os.environ.get('DJANGO_SUPERUSER_PASSWORD')
     
     try:
         # Check database connection first
@@ -39,3 +39,7 @@ def create_superuser():
         
 if __name__ == '__main__':
     create_superuser()
+
+#    username = 'admin'
+#    email = 'admin@trumpcoin-benefit.live'
+#    password = 'The7isstrong!'  # Change this to a secure password
